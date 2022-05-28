@@ -1,16 +1,35 @@
-# flutterdex
+# Flutterdex
 
-A new Flutter project.
+This is a Pokédex app created with Flutter.
+
+The data used in this app was provided by [PokeAPI](https://pokeapi.co/).
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+First of all, you have to have Flutter SDK and a code editor installed to run this project.
 
-A few resources to get you started if this is your first Flutter project:
+If you don't have any of the code editors listed bellow, you can download and install your favourite here:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [Android Studio](https://developer.android.com/studio)
+- [VS Studio Code](https://code.visualstudio.com/download)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+If you don't have Flutter installed, [CLICK HERE](https://docs.flutter.dev/get-started/install) and you will find all the instructions to install Flutter SDK and the configuration for both code editors.
+
+Once you followed all the instructions you'll have a configured Android or iOS emulator, or maybe your physical device.
+
+Now you just have to clone this repo on your computer,
+[download and install Git](https://git-scm.com/downloads) if you don't have it, open a terminal in the location you want to download the project and then run:
+
+`$ git clone https://github.com/Guix98/Flutterdex.git`
+
+Once the project is downlodaded, with your **emulator opened or your devide connected**, you can open the project folder on your code editor and run it, or you can open a terminal inside the project folder and run:
+
+`$ flutter run`
+
+**Congratularions!** you now have a Pokedex in your phone.
+
+## How it works
+
+At the begginning you'll see a Pokémon by default, you can see it's name, types, Pokédex, number, and also all the pokedex entries for this Pokémon.
+
+![](https://raw.githubusercontent.com/Guix98/Flutterdex/master/assets/substitute.png)

@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 class PokedexController extends GetxController {
   @override
   Future<void> onInit() async {
-    await loadPokemon('gastly');
+    await loadPokemon(1);
     super.onInit();
   }
 
