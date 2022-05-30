@@ -36,6 +36,10 @@ class PokedexController extends GetxController {
   get getGenus => this._genus.value;
   set setGenus(value) => this._genus.value = value;
 
+  final _spanishgenus = ''.obs;
+  get getSpanishGenus => this._spanishgenus.value;
+  set setSpanishGenus(value) => this._spanishgenus.value = value;
+
   final _firstType = ''.obs;
   get getFirstType => this._firstType.value;
   set setFirstType(value) => this._firstType.value = value;
@@ -81,6 +85,15 @@ class PokedexController extends GetxController {
   get getDescription => this.descriptions.value;
   set setDescription(value) => this.descriptions.value = value;
 
+  final RxList<FlavorTextEntry> spanishDescriptions = [
+    FlavorTextEntry(
+        flavorText: 'flavorText',
+        language: Language(name: 'name', url: 'url'),
+        version: Version(name: 'name', url: 'url'))
+  ].obs;
+  get getSpanishDescription => this.spanishDescriptions.value;
+  set setSpanishDescription(value) => this.spanishDescriptions.value = value;
+
   Future<void> getSpeciesById(dynamic pokedexNum) async {
     String url = dotenv.env['BASE_URL']! + 'pokemon-species/$pokedexNum/';
     final response = await http.get(Uri.parse(url));
@@ -88,14 +101,23 @@ class PokedexController extends GetxController {
     List<FlavorTextEntry> auxFlavors = species.flavorTextEntries
         .where((description) => description.language.name == "en")
         .toList();
+    List<FlavorTextEntry> auxFlavorsSp = species.flavorTextEntries
+        .where((description) => description.language.name == "es")
+        .toList();
     _id.value = species.id.toString();
     _name.value = species.name.capitalizeFirst!;
     _genus.value = species.genera
-        .where((element) => element.language.name == "en")
+        .where((element) => (element.language.name == "en"))
+        .first
+        .genus
+        .capitalize!;
+    _spanishgenus.value = species.genera
+        .where((element) => (element.language.name == "es"))
         .first
         .genus
         .capitalize!;
     descriptions.value = fixDescriptions(auxFlavors);
+    spanishDescriptions.value = fixDescriptions(auxFlavorsSp);
   }
 
   List<FlavorTextEntry> fixDescriptions(List<FlavorTextEntry> originalFlavors) {

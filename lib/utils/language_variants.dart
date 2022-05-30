@@ -1,0 +1,1 @@
+enum LanguageVariant { eng, esp }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterdex/controllers/pokedex_controller.dart';
 import 'package:flutterdex/pages/pokemon_search_delegate.dart';
 import 'package:flutterdex/theme/colors.dart';
+import 'package:flutterdex/utils/language_variants.dart';
 import 'package:flutterdex/widgets/icons/pokeball.dart';
 import 'package:flutterdex/widgets/pokedex_entry/pokedex_entries.dart';
 import 'package:flutterdex/widgets/pokedex_entry/pokemon_stats.dart';
@@ -20,6 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PokedexController _pokedexController =
       Get.put<PokedexController>(PokedexController());
+  final pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,72 +54,144 @@ class _HomePageState extends State<HomePage> {
             : Stack(
                 children: [
                   const PokedexBackground(),
-                  Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Container(
-                      height: Get.height,
-                      width: double.infinity,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(25)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          PokedexHeader(pokedexController: _pokedexController),
-                          Stack(
-                            alignment: AlignmentDirectional.topEnd,
-                            children: [
-                              Container(
-                                  width: double.infinity,
-                                  child: FadeInImage.assetNetwork(
-                                      placeholder: 'assets/substitute.png',
-                                      image: _pokedexController.getImageUrl,
-                                      fadeInDuration:
-                                          const Duration(milliseconds: 250),
-                                      height: Get.height * 0.25)),
-                              TypeChips(pokedexController: _pokedexController)
-                            ],
-                          ),
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  shape: StadiumBorder()),
-                              onPressed: () {
-                                Get.bottomSheet(
-                                    Container(
-                                        color: Colors.white,
-                                        child: PokedexStats(
-                                            pokedexController:
-                                                _pokedexController)),
-                                    barrierColor:
-                                        Colors.white.withOpacity(0.5));
-                              },
-                              child: Container(
-                                width: Get.width * 0.3,
-                                child: Text(
-                                  "Stats",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              )),
-                          SizedBox(height: 15),
-                          Container(
-                              width: double.infinity,
-                              child: Text(
-                                'Pokédex Entries:',
-                                style: TextStyle(fontSize: 25),
-                              )),
-                          PokedexEntries(pokedexController: _pokedexController)
-                        ],
-                      ),
-                    ),
+                  PageView(
+                    controller: pageController,
+                    children: [
+                      englishEntry(),
+                      spanishEntry(),
+                    ],
                   ),
                 ],
               ),
       ),
       backgroundColor: pokeRed,
+    );
+  }
+
+  Padding englishEntry() {
+    return Padding(
+      padding: const EdgeInsets.all(25.0),
+      child: Container(
+        height: Get.height,
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(25)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            PokedexHeader(pokedexController: _pokedexController),
+            Stack(
+              alignment: AlignmentDirectional.topEnd,
+              children: [
+                Container(
+                    width: double.infinity,
+                    child: FadeInImage.assetNetwork(
+                        placeholder: 'assets/substitute.png',
+                        image: _pokedexController.getImageUrl,
+                        fadeInDuration: const Duration(milliseconds: 250),
+                        height: Get.height * 0.25)),
+                TypeChips(pokedexController: _pokedexController)
+              ],
+            ),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(shape: StadiumBorder()),
+                onPressed: () {
+                  Get.bottomSheet(
+                      Container(
+                          color: Colors.white,
+                          child: PokedexStats(
+                              pokedexController: _pokedexController)),
+                      barrierColor: Colors.white.withOpacity(0.5));
+                },
+                child: Container(
+                  width: Get.width * 0.3,
+                  child: Text(
+                    "Stats",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                )),
+            SizedBox(height: 15),
+            Container(
+                width: double.infinity,
+                child: Text(
+                  'Pokédex Entries:',
+                  style: TextStyle(fontSize: 25),
+                )),
+            PokedexEntries(pokedexController: _pokedexController)
+          ],
+        ),
+      ),
+    );
+  }
+
+  Padding spanishEntry() {
+    return Padding(
+      padding: const EdgeInsets.all(25.0),
+      child: Container(
+        height: Get.height,
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(25)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            PokedexHeader(
+              pokedexController: _pokedexController,
+              languageVariant: LanguageVariant.esp,
+            ),
+            Stack(
+              alignment: AlignmentDirectional.topEnd,
+              children: [
+                Container(
+                    width: double.infinity,
+                    child: FadeInImage.assetNetwork(
+                        placeholder: 'assets/substitute.png',
+                        image: _pokedexController.getImageUrl,
+                        fadeInDuration: const Duration(milliseconds: 250),
+                        height: Get.height * 0.25)),
+                TypeChips(pokedexController: _pokedexController)
+              ],
+            ),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(shape: StadiumBorder()),
+                onPressed: () {
+                  Get.bottomSheet(
+                      Container(
+                          color: Colors.white,
+                          child: PokedexStats(
+                            pokedexController: _pokedexController,
+                            languageVariant: LanguageVariant.esp,
+                          )),
+                      barrierColor: Colors.white.withOpacity(0.5));
+                },
+                child: Container(
+                  width: Get.width * 0.3,
+                  child: Text(
+                    "Stats",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                )),
+            SizedBox(height: 15),
+            Container(
+                width: double.infinity,
+                child: Text(
+                  'Entrdas de la Pokédex:',
+                  style: TextStyle(fontSize: 25),
+                  overflow: TextOverflow.ellipsis,
+                )),
+            PokedexEntries(
+              pokedexController: _pokedexController,
+              languageVariant: LanguageVariant.esp,
+            )
+          ],
+        ),
+      ),
     );
   }
 }
