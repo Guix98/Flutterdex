@@ -76,6 +76,14 @@ class PokedexController extends GetxController {
   get getSpeed => this._speed.value;
   set setSpeed(value) => this._speed.value = value;
 
+  final _weight = 0.obs;
+  get getWeight => this._weight.value;
+  set setWeight(value) => this._weight.value = value;
+
+  final _height = 0.obs;
+  get getHeight => this._height.value;
+  set setHeight(value) => this._height.value = value;
+
   final RxList<FlavorTextEntry> descriptions = [
     FlavorTextEntry(
         flavorText: 'flavorText',
@@ -147,6 +155,10 @@ class PokedexController extends GetxController {
     } else {
       _secondType.value = '';
     }
+    _height.value = stats.height;
+
+    _weight.value = stats.weight;
+
     _imageurl.value = stats.sprites.other.officialArtwork.frontDefault;
 
     _hp.value = stats.stats

@@ -85,14 +85,33 @@ class _HomePageState extends State<HomePage> {
             Stack(
               alignment: AlignmentDirectional.topEnd,
               children: [
-                Container(
-                    width: double.infinity,
-                    child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/substitute.png',
-                        image: _pokedexController.getImageUrl,
-                        fadeInDuration: const Duration(milliseconds: 250),
-                        height: Get.height * 0.25)),
-                TypeChips(pokedexController: _pokedexController)
+                Column(
+                  children: [
+                    Container(
+                        width: double.infinity,
+                        child: FadeInImage.assetNetwork(
+                            placeholder: 'assets/substitute.png',
+                            image: _pokedexController.getImageUrl,
+                            fadeInDuration: const Duration(milliseconds: 250),
+                            height: Get.height * 0.25)),
+                    SizedBox(
+                      height: Get.height * 0.05,
+                    )
+                  ],
+                ),
+                TypeChips(pokedexController: _pokedexController),
+                Positioned(
+                    bottom: 0,
+                    left: 0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                            'Height: ${_pokedexController.getHeight.toString()} m'),
+                        Text(
+                            'Weight: ${_pokedexController.getWeight.toString()} Kg'),
+                      ],
+                    ))
               ],
             ),
             ElevatedButton(
@@ -147,14 +166,33 @@ class _HomePageState extends State<HomePage> {
             Stack(
               alignment: AlignmentDirectional.topEnd,
               children: [
-                Container(
-                    width: double.infinity,
-                    child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/substitute.png',
-                        image: _pokedexController.getImageUrl,
-                        fadeInDuration: const Duration(milliseconds: 250),
-                        height: Get.height * 0.25)),
-                TypeChips(pokedexController: _pokedexController)
+                Column(
+                  children: [
+                    Container(
+                        width: double.infinity,
+                        child: FadeInImage.assetNetwork(
+                            placeholder: 'assets/substitute.png',
+                            image: _pokedexController.getImageUrl,
+                            fadeInDuration: const Duration(milliseconds: 250),
+                            height: Get.height * 0.25)),
+                    SizedBox(
+                      height: Get.height * 0.05,
+                    )
+                  ],
+                ),
+                TypeChips(pokedexController: _pokedexController),
+                Positioned(
+                    bottom: 0,
+                    left: 0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                            'Altura: ${_pokedexController.getHeight.toString()} m'),
+                        Text(
+                            'Peso: ${_pokedexController.getWeight.toString()} Kg'),
+                      ],
+                    ))
               ],
             ),
             ElevatedButton(
